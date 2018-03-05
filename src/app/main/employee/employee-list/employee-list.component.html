@@ -1,0 +1,41 @@
+<br>
+<div class="row move-left">
+  <div class="col-sm-12 text-right">
+    <a class="btn btn-primary" routerLink="/add-employee"><i class="fa fa-user"></i> Add Employee</a>
+  </div>
+</div>
+<br>
+<div class="row move-left">
+  <div class="col-sm-12">
+    <table class="table table-bordered table-striped table-hover ">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>FIRST NAME</th>
+          <th>LAST NAME</th>
+          <th>DATE OF JOINING</th>
+          <th>DESIGNATION</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let employee of employees">
+          <td>
+            <span (click)="navigate(employee.id)" class="hand text-primary">{{ employee.id }}</span>
+          </td>
+          <td>
+            <span (click)="navigate(employee.id)" class="hand text-primary">{{ employee.firstName }}</span>
+          </td>
+          <td>{{ employee.lastName }}</td>
+          <td>{{ employee.doj | date}}</td>
+          <td>{{ employee.designation }}</td>
+          <td>
+            <span (click)="onDelete(employee)" class="text-danger hand">
+              <i class="fa fa-trash"></i>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

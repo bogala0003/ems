@@ -1,0 +1,74 @@
+<div class="row">
+  <div class="col-sm-12">
+    <h3 class="text-center">
+      <span [hidden]="employeeId">Add </span>
+      <span [hidden]="!employeeId">Update</span> Employee </h3>
+    <hr>
+  </div>
+  <div class="col-sm-3"></div>
+  <div class="col-sm-6">
+    <div class="container">
+      <form #employeeForm="ngForm">
+        <div class="form-group">
+          <label for="id">Employee Id
+            <span class="text-danger">*</span>
+          </label>
+          <input type="text" class="form-control" id="id" [(ngModel)]="employee.id" appNumbersOnly required name="id" #id="ngModel"
+            minlength="4" maxlength="10" [ngClass]="{'valid':id.valid,'invalid':id.invalid && employeeForm.submitted }" [disabled]="employeeId">
+          <div *ngIf="employeeForm.submitted && id.invalid && id.dirty" class="text-danger">
+            Id must be at least 4 characters long.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="firstName">First Name
+            <span class="text-danger">*</span>
+          </label>
+          <input type="text" class="form-control" id="firstName" [(ngModel)]="employee.firstName" required name="firstName" #firstName="ngModel"
+            [ngClass]="{'valid':firstName.valid,'invalid':firstName.invalid && employeeForm.submitted }" pattern="[a-zA-Z ]*">
+          <div *ngIf="employeeForm.submitted && firstName.invalid && firstName.errors.pattern" class="text-danger">
+            First Name should not contain special characters.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name
+            <span class="text-danger">*</span>
+          </label>
+          <input type="text" class="form-control" [(ngModel)]="employee.lastName" id="lastName" name="lastName" pattern="[a-zA-Z ]*"
+            required #lastName="ngModel" [ngClass]="{'valid':lastName.valid,'invalid':lastName.invalid && employeeForm.submitted }">
+          <div *ngIf="employeeForm.submitted && lastName.invalid && lastName.errors.pattern" class="text-danger">
+            Last Name should not contain special characters.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="designation">Designation
+            <span class="text-danger">*</span>
+          </label>
+          <select [(ngModel)]="employee.designation" id="designation" name="designation" class="form-control" required #designation="ngModel"
+            [ngClass]="{'valid':designation.valid,'invalid':designation.invalid && employeeForm.submitted }">
+            <option selected="selected">--Select--</option>
+            <option *ngFor="let designation of designations | orderBy:'designation'" [ngValue]="designation">{{designation}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="dob">Date Of Join</label>
+          <div class="input-group" [ngClass]="{'valid':doj.valid,'invalid':doj.invalid && employeeForm.submitted }">
+            <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [navigation]="navigation" [maxDate]="maxDate" ngbDatepicker
+              [(ngModel)]="joiningDate" #d="ngbDatepicker" required readonly #doj="ngModel">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                <i style="cursor: pointer;" class="fa fa-calendar"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-success" (click)="onSubmit(employeeForm)" *ngIf="employeeId">Update</button>
+          <button type="submit" class="btn btn-success" (click)="onSubmit(employeeForm)" *ngIf="!employeeId">Create</button>
+          <button *ngIf="!employeeId" type="reset" (click)="onReset()" class="btn btn-danger">Reset</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="col-sm-3"></div>
+
+</div>
