@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Employee } from './../../../employee';
-import { EmployeeService } from '../../../employee.service'
-import { Router,ActivatedRoute } from "@angular/router";
+import { EmployeeService } from '../../../employee.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -15,13 +15,12 @@ export class EmployeeListComponent {
     this.employees = employeeService.getAll();
   }
   navigate(id: String): void {
-    this.router.navigate(['add-employee', id ]);
+    this.router.navigate(['add-employee', id]);
   }
-  onDelete(employee){
-    alert(employee.id)
-    if(this.employeeService.delete(employee)){
-      this.employees=this.employeeService.getAll();
-    }else{
+  onDelete(employee) {
+    if (this.employeeService.delete(employee)) {
+      this.employees = this.employeeService.getAll();
+    } else {
 
     }
   }

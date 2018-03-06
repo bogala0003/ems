@@ -25,11 +25,15 @@ export class AddEmployeeComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.employeeId = +params['id'];
-      var employee = this.employeeService.getById(this.employeeId);
+      const employee = this.employeeService.getById(this.employeeId);
       this.employee = employee ? employee : this.employee = new Employee();
       if (this.employee && this.employee.doj) {
         this.employee.doj = new Date(this.employee.doj);
-        this.joiningDate = { year: this.employee.doj.getFullYear(), month: this.employee.doj.getMonth()+1 , day: this.employee.doj.getDate() };
+        this.joiningDate = {
+          year: this.employee.doj.getFullYear(),
+          month: this.employee.doj.getMonth() + 1,
+          day: this.employee.doj.getDate()
+        };
       }
     });
   }
@@ -37,7 +41,7 @@ export class AddEmployeeComponent implements OnInit {
   onSubmit(employeeForm): void {
     if (employeeForm.submitted && employeeForm.valid) {
       if (this.joiningDate) {
-        var date = new Date(this.joiningDate.year, this.joiningDate.month-1, this.joiningDate.day);
+        const date = new Date(this.joiningDate.year, this.joiningDate.month - 1, this.joiningDate.day);
         this.employee.doj = date;
       }
       if (this.employeeId) {

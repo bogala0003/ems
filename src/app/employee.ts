@@ -5,6 +5,6 @@ export class Employee {
     lastName: string;
     doj: Date;
     designation: string;
-    constructor(){
+    constructor() {
     }
 }

@@ -31,7 +31,7 @@ const appRoutes: Routes = [
   { path: 'users', component: UserComponent },
   {
     path: '',
-    redirectTo: '/employees', pathMatch: "full"
+    redirectTo: '/employees', pathMatch: 'full'
   },
   { path: '**', component: PageNotFoundComponent },
 ];
@@ -56,11 +56,11 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
-    HttpClientModule,    
+    HttpClientModule,
     NgbModule.forRoot(),
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [AppService,EmployeeService],
+  providers: [AppService, EmployeeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
