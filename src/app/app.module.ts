@@ -3,6 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -21,11 +22,13 @@ import { AddEmployeeComponent } from './main/employee/add-employee/add-employee.
 import { EmployeeService } from './employee.service';
 import { OrderByPipe } from './order-by.pipe';
 import { NumbersOnlyDirective } from './numbers-only.directive';
-
+import { AppService } from './app.service';
+import { UserComponent } from './main/user/user.component';
 const appRoutes: Routes = [
   { path: 'employees', component: EmployeeListComponent },
   { path: 'add-employee/:id', component: AddEmployeeComponent },
   { path: 'add-employee', component: AddEmployeeComponent },
+  { path: 'users', component: UserComponent },
   {
     path: '',
     redirectTo: '/employees', pathMatch: "full"
@@ -46,17 +49,18 @@ const appRoutes: Routes = [
     EmployeeListComponent,
     OrderByPipe,
     NumbersOnlyDirective,
+    UserComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
-    
+    HttpClientModule,    
     NgbModule.forRoot(),
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [EmployeeService],
+  providers: [AppService,EmployeeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
